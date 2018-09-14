@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ProjectFenix" Class="DataClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=TRAKET12;Initial Catalog=ProjectFenix;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="ProjectFenixConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Comentario" Member="Comentario">
+    <Type Name="Comentario">
+      <Column Name="IDComentario" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Comentario" Member="Comentario1" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="IDNoticia" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="IDUsuario" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Association Name="Noticia_Comentario" Member="Noticia" ThisKey="IDNoticia" OtherKey="IDNoticia" Type="Noticia" IsForeignKey="true" />
+      <Association Name="Usuario_Comentario" Member="Usuario" ThisKey="IDUsuario" OtherKey="IDUsuario" Type="Usuario" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Noticia" Member="Noticia">
+    <Type Name="Noticia">
+      <Column Name="IDNoticia" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Fecha" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Titulo" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="Contenido" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Foto" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="IDSeccion" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="IDUsuario" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Association Name="Noticia_Comentario" Member="Comentario" ThisKey="IDNoticia" OtherKey="IDNoticia" Type="Comentario" />
+      <Association Name="Noticia_Valoracion" Member="Valoracion" ThisKey="IDNoticia" OtherKey="IDNoticia" Type="Valoracion" />
+      <Association Name="Seccion_Noticia" Member="Seccion" ThisKey="IDSeccion" OtherKey="IDSeccion" Type="Seccion" IsForeignKey="true" />
+      <Association Name="Usuario_Noticia" Member="Usuario" ThisKey="IDUsuario" OtherKey="IDUsuario" Type="Usuario" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Seccion" Member="Seccion">
+    <Type Name="Seccion">
+      <Column Name="IDSeccion" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Seccion" Member="Seccion1" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="Seccion_Noticia" Member="Noticia" ThisKey="IDSeccion" OtherKey="IDSeccion" Type="Noticia" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Usuario" Member="Usuario">
+    <Type Name="Usuario">
+      <Column Name="IDUsuario" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Usuario" Member="Usuario1" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Contraseña" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Correo" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Roll" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Passadmin" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Nombre" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="App" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Apm" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Carrera" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Celular" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Usuario_Comentario" Member="Comentario" ThisKey="IDUsuario" OtherKey="IDUsuario" Type="Comentario" />
+      <Association Name="Usuario_Noticia" Member="Noticia" ThisKey="IDUsuario" OtherKey="IDUsuario" Type="Noticia" />
+      <Association Name="Usuario_Valoracion" Member="Valoracion" ThisKey="IDUsuario" OtherKey="IDUsuario" Type="Valoracion" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Valoracion" Member="Valoracion">
+    <Type Name="Valoracion">
+      <Column Name="IDValor" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Valor" Type="System.Decimal" DbType="Decimal(2,2) NOT NULL" CanBeNull="false" />
+      <Column Name="IDNoticia" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="IDUsuario" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Association Name="Noticia_Valoracion" Member="Noticia" ThisKey="IDNoticia" OtherKey="IDNoticia" Type="Noticia" IsForeignKey="true" />
+      <Association Name="Usuario_Valoracion" Member="Usuario" ThisKey="IDUsuario" OtherKey="IDUsuario" Type="Usuario" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
